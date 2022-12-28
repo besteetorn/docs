@@ -1,0 +1,187 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "CHARGERSMS DEVELOPER",
+		"description": "สำหรับนักพัฒนาที่ต้องการใช้งาน CHARGERSMS สามารถใช้งานตามคู่มือการเชื่อมต่อด้านล่างได้เลย!",
+		"version": "1.0.0"
+	},
+	"servers": [
+		{
+			"url": "https://n8n.chargersms.com"
+		}
+	],
+	"components": {
+		"securitySchemes": {
+			"basicAuth": {
+				"type": "http",
+				"scheme": "basic",
+				"description": ""
+			}
+		}
+	},
+	"paths": {
+		"/webhook/dev-checkcredit": {
+			"get": {
+				"summary": "[CHARGERDEV] Check Credit",
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์",
+				"security": [
+					{
+						"basicAuth": []
+					}
+				],
+				"responses": {},
+				"x-internal": false,
+				"parameters": []
+			}
+		},
+		"/webhook/dev-sendsms": {
+			"post": {
+				"summary": "[CHARGERDEV] Send SMS",
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์",
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"msisdn": {
+										"type": "string",
+										"description": "เบอร์โทรศัพท์ถ้าต้องการส่งหลายเบอร์ให้ใช้ comma เช่น 0999999999,0888888888"
+									},
+									"msg": {
+										"type": "string",
+										"description": "ข้อความที่ต้องการส่ง จำกัดความยาวไม่เกิน 900 ตัวอักษร ภาษาอังกฤษ 160 ตัวอักษร คิดเป็น 1 เครดิต ส่วนภาษาไทย 70 ตัวอักษร คิดเป็น 1 เครดิต สำหรับข้อความที่มีภาษาไทยปนอังกฤษ คิดเครดิตเป็นภาษาไทย"
+									},
+									"sender": {
+										"type": "string",
+										"description": "ชื่อผู้ส่ง Sender Name"
+									},
+									"time": {
+										"type": "string",
+										"description": "ตั้งเวลาในการส่ง format: 2022-12-09T09:00:00+07:00"
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"basicAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				},
+				"x-internal": false,
+				"parameters": []
+			}
+		},
+		"/webhook/dev-request-otp": {
+			"post": {
+				"summary": "[CHARGERDEV] Request OTP",
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์",
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"msisdn": {
+										"type": "string",
+										"description": "เบอร์โทรศัพท์ที่ต้องการส่ง OTP"
+									},
+									"msg": {
+										"type": "string",
+										"description": "ข้อความที่ต้องการส่งจะต้องใส่ TAG [OTP] และ [REF] มาในข้อความเสมอ ไม่งั้นระบบจะไม่ Generate OTP ให้"
+									},
+									"sender": {
+										"type": "string",
+										"description": "ชื่อผู้ส่ง Sender Name"
+									},
+									"time": {
+										"type": "string",
+										"description": "เวลาในการส่ง OTP โดยใช้ format: 2022-12-9T09:00:00+07:00"
+									},
+									"otp_expire": {
+										"type": "string",
+										"description": "ระยะเวลา Expire OTP หน่วยเป็นตัวเลขนาทีเช่น 1 หรือ 5"
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"basicAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				},
+				"x-internal": false,
+				"parameters": []
+			}
+		},
+		"/webhook/dev-verify-otp": {
+			"post": {
+				"summary": "[CHARGERDEV] Verify OTP",
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์",
+				"requestBody": {
+					"content": {
+						"multipart/form-data": {
+							"schema": {
+								"type": "object",
+								"properties": {
+									"ref": {
+										"type": "string",
+										"description": "รหัสอ้างอิง ref"
+									},
+									"otp": {
+										"type": "string",
+										"description": "รหัส OTP"
+									},
+									"transid": {
+										"type": "string",
+										"description": "Transaction ID หรือ Token Key ที่ได้จากขั้นตอน Request OTP จาก respone webhook"
+									},
+									"msisdn": {
+										"type": "string",
+										"description": "หมายเลขโทรศัพท์ที่ขอ OTP"
+									}
+								}
+							}
+						}
+					}
+				},
+				"security": [
+					{
+						"basicAuth": []
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successful response",
+						"content": {
+							"application/json": {}
+						}
+					}
+				},
+				"x-internal": false,
+				"parameters": []
+			}
+		}
+	},
+	"x-internal": false
+}
