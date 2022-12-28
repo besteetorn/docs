@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "ea6e16e2-c197-4ba5-9faa-7990d624df10",
+		"name": "CHARGERSMS DEVELOPER",
+		"description": "สำหรับนักพัฒนาที่ต้องการใช้งาน CHARGERSMS สามารถใช้งานตามคู่มือการเชื่อมต่อด้านล่างได้เลย!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21234253"
+	},
+	"item": [
+		{
+			"name": "[CHARGERDEV] Send SMS",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "msisdn",
+							"value": "",
+							"description": "เบอร์โทรศัพท์ถ้าต้องการส่งหลายเบอร์ให้ใช้ comma เช่น 0999999999,0888888888",
+							"type": "text"
+						},
+						{
+							"key": "msg",
+							"value": "",
+							"description": "ข้อความที่ต้องการส่ง จำกัดความยาวไม่เกิน 900 ตัวอักษร ภาษาอังกฤษ 160 ตัวอักษร คิดเป็น 1 เครดิต ส่วนภาษาไทย 70 ตัวอักษร คิดเป็น 1 เครดิต สำหรับข้อความที่มีภาษาไทยปนอังกฤษ คิดเครดิตเป็นภาษาไทย",
+							"type": "text"
+						},
+						{
+							"key": "sender",
+							"value": "",
+							"description": "ชื่อผู้ส่ง Sender Name",
+							"type": "text"
+						},
+						{
+							"key": "time",
+							"value": "",
+							"description": "ตั้งเวลาในการส่ง format: 2022-12-09T09:00:00+07:00",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://n8n.chargersms.com/webhook/dev-sendsms",
+					"protocol": "https",
+					"host": [
+						"n8n",
+						"chargersms",
+						"com"
+					],
+					"path": [
+						"webhook",
+						"dev-sendsms"
+					]
+				},
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์"
+			},
+			"response": []
+		},
+		{
+			"name": "[CHARGERDEV] Check Credit",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://n8n.chargersms.com/webhook/dev-checkcredit",
+					"protocol": "https",
+					"host": [
+						"n8n",
+						"chargersms",
+						"com"
+					],
+					"path": [
+						"webhook",
+						"dev-checkcredit"
+					]
+				},
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์"
+			},
+			"response": []
+		},
+		{
+			"name": "[CHARGERDEV] Request OTP",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Best22zap",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "nateetorn",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "msisdn",
+							"value": "",
+							"description": "เบอร์โทรศัพท์ที่ต้องการส่ง OTP",
+							"type": "text"
+						},
+						{
+							"key": "msg",
+							"value": "",
+							"description": "ข้อความที่ต้องการส่งจะต้องใส่ TAG [OTP] และ [REF] มาในข้อความเสมอ ไม่งั้นระบบจะไม่ Generate OTP ให้",
+							"type": "text"
+						},
+						{
+							"key": "sender",
+							"value": "",
+							"description": "ชื่อผู้ส่ง Sender Name",
+							"type": "text"
+						},
+						{
+							"key": "time",
+							"value": "",
+							"description": "เวลาในการส่ง OTP โดยใช้ format: 2022-12-9T09:00:00+07:00",
+							"type": "text"
+						},
+						{
+							"key": "otp_expire",
+							"value": "",
+							"description": "ระยะเวลา Expire OTP หน่วยเป็นตัวเลขนาทีเช่น 1 หรือ 5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://n8n.chargersms.com/webhook/dev-request-otp",
+					"protocol": "https",
+					"host": [
+						"n8n",
+						"chargersms",
+						"com"
+					],
+					"path": [
+						"webhook",
+						"dev-request-otp"
+					]
+				},
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์"
+			},
+			"response": []
+		},
+		{
+			"name": "[CHARGERDEV] Verify OTP",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "ref",
+							"value": "",
+							"description": "รหัสอ้างอิง ref",
+							"type": "text"
+						},
+						{
+							"key": "otp",
+							"value": "",
+							"description": "รหัส OTP",
+							"type": "text"
+						},
+						{
+							"key": "transid",
+							"value": "",
+							"description": "Transaction ID หรือ Token Key ที่ได้จากขั้นตอน Request OTP จาก respone webhook",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "",
+							"description": "หมายเลขโทรศัพท์ที่ขอ OTP",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://n8n.chargersms.com/webhook/dev-verify-otp",
+					"protocol": "https",
+					"host": [
+						"n8n",
+						"chargersms",
+						"com"
+					],
+					"path": [
+						"webhook",
+						"dev-verify-otp"
+					]
+				},
+				"description": "username: ใช้ username ที่สมัครจากเว็บไซต์\n\npassword: ใช้ password ที่สมัครจากเว็บไซต์"
+			},
+			"response": []
+		}
+	]
+}
